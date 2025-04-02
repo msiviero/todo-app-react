@@ -1,8 +1,12 @@
+import { PropsWithChildren } from "react";
 
-export const Shell = () => {
+export const Shell: React.FC<PropsWithChildren> = ({ children }) => {
     return (
-        <h1 className="text-3xl font-bold underline">
-            Hello World
-        </h1>
+        <div className="container mx-auto px-4">
+            <h1 className="text-2xl font-bold underline py-4">
+                Dummy todo app
+            </h1>
+            {children}
+        </div>
     );
 };
