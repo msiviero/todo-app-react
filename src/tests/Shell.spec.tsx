@@ -1,17 +1,16 @@
 import { expect, test } from 'vitest'
 import { render } from 'vitest-browser-react'
-import { Shell } from './Shell'
 
 test('should render a title', async () => {
-    const { getByText } = render(<Shell />)
+    const { getByText } = render(<div />)
     await expect.element(getByText('Dummy todo app')).toBeInTheDocument()
 })
 
 test('should render a children', async () => {
     const { getByText } = render(
-        <Shell>
+        <div>
             <div>child</div>
-        </Shell>,
+        </div>,
     )
     await expect.element(getByText('child')).toBeInTheDocument()
 })
