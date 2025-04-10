@@ -8,7 +8,7 @@ test('should render the title', async () => {
 })
 
 test('Should filter by completed status', async () => {
-    const { getByRole, getByText, getByLabelText, debug } = render(<TodoApp />)
+    const { getByRole, getByText, getByLabelText } = render(<TodoApp />)
 
     const filterIcon = getByLabelText('Title').getByRole('button');
 
