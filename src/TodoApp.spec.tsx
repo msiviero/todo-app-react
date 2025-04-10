@@ -6,3 +6,17 @@ test('should render the title', async () => {
     const { getByText } = render(<TodoApp />)
     await expect.element(getByText('Todo App')).toBeInTheDocument()
 })
+
+test('Should filter by completed status', async () => {
+    const { getByRole, getByText, getByLabelText, debug } = render(<TodoApp />)
+
+    const filterIcon = getByLabelText('Title').getByRole('button');
+
+    await filterIcon.click();
+
+    await getByText('Show uncompleted only').click();
+    await getByRole('button', { name: 'ok' }).click();
+
+    expect(getByText('Learn React')).toBeInTheDocument();
+    expect(getByText('Learn Typescript').query()).not.toBeInTheDocument();
+})
