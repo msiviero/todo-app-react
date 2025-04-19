@@ -1,3 +1,5 @@
+import { TodoForm } from "./components/TodoForm";
+import { TodoItem } from "./components/TodoItem";
 
 export const TodoApp: React.FC = () => (
     <>
@@ -17,27 +19,7 @@ export const TodoApp: React.FC = () => (
 
         <main>
             <div className="uk-container">
-                <div className="uk-padding">
-                    <div className="uk-card uk-card-default uk-card-body">
-                        <h2 className="uk-card-title uk-heading-small">
-                            Buy the milk
-                        </h2>
-                        <p uk-margin="true">
-                            <button className="uk-button uk-button-primary uk-margin-small-right" >
-                                <span uk-icon="check" className="uk-margin-small-right" />
-                                Toggle done
-                            </button>
-                            {/* <button className="uk-button uk-button-default uk-margin-small-right">
-                                <span uk-icon="file-edit" className="uk-margin-small-right" />
-                                Edit
-                            </button> */}
-                            <button className="uk-button uk-button-danger uk-margin-small-right">
-                                <span uk-icon="minus-circle" className="uk-margin-small-right" />
-                                Delete
-                            </button>
-                        </p>
-                    </div>
-                </div>
+                <TodoItem/>
             </div>
         </main>
 
@@ -46,21 +28,7 @@ export const TodoApp: React.FC = () => (
                 <button className="uk-modal-close-default" type="button" uk-close="true"></button>
                 <h2 className="uk-modal-title">Add a todo</h2>
                 <div>
-                    <form>
-                        <fieldset className="uk-fieldset">
-                            <div className="uk-margin">
-                                <input className="uk-input" type="text" placeholder="Input" aria-label="Input" />
-                            </div>
-                            <div className="uk-margin">
-                                <p className="uk-text-right">
-                                    <button className="uk-button uk-button-primary" type="button">
-                                        <span uk-icon="check" className="uk-margin-small-right" />
-                                        Save
-                                    </button>
-                                </p>
-                            </div>
-                        </fieldset>
-                    </form>
+                    <TodoForm/>
                 </div>
             </div>
         </div>
