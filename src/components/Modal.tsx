@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { CloseIcon } from "./Icon";
 
 type ModalProps = {
     title: string;
@@ -20,14 +21,18 @@ export const Modal = ({ title, open, onClose, children }: ModalProps) => {
 
     return (
         <dialog
-            className="mt-8 mx-auto backdrop:bg-black/50"
+            className="w-full mt-8 mx-auto rounded backdrop:bg-black/50"
             ref={ref} onCancel={onClose}
         >
-            <h1>{title}</h1>
+            <div className="flex justify-between items-center px-4 py-2">
+                <h1 className="text-2xl font-bold">
+                    {title}
+                </h1>
+                <button onClick={onClose}>
+                    <CloseIcon />
+                </button>
+            </div>
             {children}
-            <button onClick={onClose}>
-                Close
-            </button>
         </dialog>
     );
 }
