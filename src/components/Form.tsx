@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 
 
-type TodoFormProps = {
+interface TodoFormProps {
     onSubmit?: (title: string) => void;
     initialValue?: string;
 };

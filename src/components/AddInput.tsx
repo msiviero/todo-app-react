@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-type AddTodoInputProps = {
+interface AddTodoInputProps {
     onSubmit: (value: string) => void;
 }
 
