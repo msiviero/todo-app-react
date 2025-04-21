@@ -17,7 +17,7 @@ export const TodoList = ({ todos }: TodoListProps) => {
                     key={index}
                 >
                     <div className="flex-1">
-                     <Checkbox label={todo.title}/>
+                        <Checkbox label={todo.title}/>
                     </div>
                     <button className="text-white bg-red-500 hover:bg-red-400 p-4 cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
