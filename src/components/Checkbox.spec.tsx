@@ -5,22 +5,24 @@ import { Checkbox } from "./Checkbox"
 
 describe("Checkbox", () => {
     test('Should be clickable', async () => {
-        const { getByRole } = render(<Checkbox label="Learn React" checked={false} />)
+
+        let checked = false;
+        const { getByRole } = render(<Checkbox label="Learn React" checked={false} onChange={(value) => checked = value} />)
 
         // initially should not be checked
-        await expect.element( getByRole('checkbox', {name : 'Learn React'})).not.toBeChecked();
+        await expect.element(getByRole('checkbox', { name: 'Learn React' })).not.toBeChecked();
 
         // click the checkbox
-        await getByRole('checkbox', {name : 'Learn React'}).click();
+        await getByRole('checkbox', { name: 'Learn React' }).click();
 
         // now sohuld be checked
-        await expect.element( getByRole('checkbox', {name : 'Learn React'})).toBeChecked();
+        expect(checked).toBeTruthy();
     })
 
     test('Should allow initial value as prop', async () => {
         const { getByRole } = render(<Checkbox label="Learn React" checked={true} />)
 
         // initially should not be checked
-        await expect.element( getByRole('checkbox', {name : 'Learn React'})).toBeChecked();
+        await expect.element(getByRole('checkbox', { name: 'Learn React' })).toBeChecked();
     })
 })
