@@ -29,25 +29,25 @@ export const makeApiService = (httpClient: AxiosInstance): ApiService => {
             const response = await httpClient.get<Todo[]>('/todo')
             return response.status === 200
                 ? { ok: true, data: response.data }
-                : { ok: false, cause: `Server error: response.statusText` }
+                : { ok: false, cause: `Server error: ${response.statusText}` }
         },
         async addTodo(todo) {
             const response = await httpClient.post<void>('/todo', todo)
             return response.status === 201
                 ? { ok: true }
-                : { ok: false, cause: `Server error: response.statusText` }
+                : { ok: false, cause: `Server error: ${response.statusText}` }
         },
         async editTodo(todo: Todo) {
             const response = await httpClient.put(`/todo/${todo.id}`, todo)
             return response.status === 200
                 ? { ok: true }
-                : { ok: false, cause: `Server error: response.statusText` }
+                : { ok: false, cause: `Server error: ${response.statusText}` }
         },
         async deleteTodo(todo: Todo) {
             const response = await httpClient.delete<void>(`/todo/${todo}`)
             return response.status === 200
                 ? { ok: true }
-                : { ok: false, cause: `Server error: response.statusText` }
+                : { ok: false, cause: `Server error: ${response.statusText}` }
         }
     }
 }
