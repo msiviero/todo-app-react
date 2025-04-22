@@ -1,20 +1,7 @@
-import { useState } from "react";
-import { Todo, TodoList } from "./components/TodoList";
-import { AddTodoInput } from "./components/AddInput";
+import { TodoList } from "./components/TodoList";
 
 
 export const TodoApp = () => {
-
-    const [todos, setTodos] = useState<Todo[]>([]);
-
-    const onTodoAdd = (title: string) => {
-        setTodos([...todos,
-        {
-            id: Math.random(),
-            title,
-        }]);
-    };
-
     return (
         <>
             <div className="flex flex-col bg-gray-100 h-screen">
@@ -24,12 +11,7 @@ export const TodoApp = () => {
                     </h1>
                 </nav>
                 <main className="flex flex-col my-4 text-gray-700">
-                    <div className="container mx-auto p-4">
-                        <AddTodoInput onSubmit={onTodoAdd} />
-                    </div>
-                    <div className="container mx-auto p-4">
-                        <TodoList todos={todos} />
-                    </div>
+                    <TodoList />
                 </main>
             </div>
         </>
