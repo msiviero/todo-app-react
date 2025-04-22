@@ -4,6 +4,27 @@ import { todoReducer } from "./todoReducer";
 
 describe('todo reducer', () => {
 
+    test('should load todos', () => {
+        const result = todoReducer([{
+            id: 1,
+            title: "test1",
+            isCompleted: true,
+        }], {
+            type: 'LOAD_TODOS',
+            items: [{
+                id: 2,
+                title: "test2",
+                isCompleted: true,
+            },]
+        });
+        expect(result).toEqual([{
+            id: 2,
+            title: "test2",
+            isCompleted: true,
+        },]);
+    })
+
+
     test('should add todo', () => {
         const result = todoReducer([{
             id: 1,

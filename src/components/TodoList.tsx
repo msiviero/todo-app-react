@@ -8,10 +8,14 @@ export const TodoList = () => {
 
     const [todos, dispatch] = useReducer(todoReducer, []);
 
-    const onTodoAdd = (value: string) => {
+    const onTodoAdd = (title: string) => {
         dispatch({
             type: 'ADD_TODO',
-            title: value,
+            item: {
+                id: Date.now(),
+                title,
+                isCompleted: false,
+            },
         })
     }
 
