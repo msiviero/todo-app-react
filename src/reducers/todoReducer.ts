@@ -37,6 +37,7 @@ export const todoReducer: Reducer<Todo[], TodoAction> = (todos, action) => {
         case 'REMOVE_TODO':
             return todos.filter((it) => it.id !== action.id);
         case 'EDIT_TODO':
+            console.log(JSON.stringify(action))
             return todos.map((it) => it.id === action.item.id ? action.item : it)
         default:
             throw new Error(`Unknown action: ${action}`)

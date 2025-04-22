@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { todoReducer } from "../reducers/todoReducer";
+import { Todo, todoReducer } from "../reducers/todoReducer";
 import { Checkbox } from "./Checkbox";
 import { AddTodoInput } from "./AddInput";
 
@@ -23,6 +23,13 @@ export const TodoList = () => {
         dispatch({ type: 'REMOVE_TODO', id })
     }
 
+    const onTodoCheck = (todo: Todo) => {
+        dispatch({
+            type: 'EDIT_TODO',
+            item: todo
+        })
+    }
+
     return (
         <>
             <div className="container mx-auto p-4">
@@ -35,7 +42,7 @@ export const TodoList = () => {
                             key={index}
                         >
                             <div className="flex-1">
-                                <Checkbox label={todo.title} />
+                                <Checkbox label={todo.title} checked={todo.isCompleted} onChange={checked => onTodoCheck({...todo, isCompleted: checked})} />
                             </div>
                             <button onClick={() => onTodoDelete(todo.id)} className="text-white bg-red-500 hover:bg-red-400 p-4 cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
