@@ -5,11 +5,10 @@ import { AddTodoInput } from "./AddInput";
 import { EditableLabel } from "./EditableLabel";
 import { ApiServiceContext } from "../di/ApiServiceProvider";
 import { Todo } from "../model/todo";
-import { ApiService, createApiService } from "../service/apiService";
-import { envConfig } from "../service/config";
+import { ApiService, httpClient, makeApiService } from "../service/apiService";
 
 
-const apiService: ApiService = createApiService(envConfig);
+const apiService: ApiService = makeApiService(httpClient);
 
 export const TodoList = () => {
 
