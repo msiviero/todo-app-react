@@ -1,9 +1,15 @@
 import { useReducer } from "react";
-import { Todo, todoReducer } from "../reducers/todoReducer";
+import { todoReducer } from "../reducers/todoReducer";
 import { Checkbox } from "./Checkbox";
 import { AddTodoInput } from "./AddInput";
 import { EditableLabel } from "./EditableLabel";
+import { ApiServiceContext } from "../di/ApiServiceProvider";
+import { Todo } from "../model/todo";
+import { ApiService, createApiService } from "../service/apiService";
+import { envConfig } from "../service/config";
 
+
+const apiService: ApiService = createApiService(envConfig);
 
 export const TodoList = () => {
 
@@ -32,7 +38,7 @@ export const TodoList = () => {
     }
 
     return (
-        <>
+        <ApiServiceContext value={apiService}>
             <div className="container mx-auto p-4">
                 <AddTodoInput onSubmit={onTodoAdd} />
             </div>
@@ -42,9 +48,9 @@ export const TodoList = () => {
                         <div className="flex flex-row gap-4 space-between items-center justify-center border-gray-100 border-b hover:bg-gray-50"
                             key={index}
                         >
-                            <Checkbox id={todo.id} checked={todo.isCompleted} onChange={checked => onTodoEdit({...todo, isCompleted: checked})} />
+                            <Checkbox id={todo.id} checked={todo.isCompleted} onChange={checked => onTodoEdit({ ...todo, isCompleted: checked })} />
                             <div className={`flex-1 ${todo.isCompleted ? 'line-through' : ''}`}>
-                                <EditableLabel onChange={value => onTodoEdit({...todo, title: value})} value={todo.title} readOnly={todo.isCompleted} />
+                                <EditableLabel onChange={value => onTodoEdit({ ...todo, title: value })} value={todo.title} readOnly={todo.isCompleted} />
                             </div>
                             <button onClick={() => onTodoDelete(todo.id)} className="text-red-500 hover:bg-red-50 p-4 cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -55,6 +61,6 @@ export const TodoList = () => {
                     ))}
                 </div>
             </div>
-        </>
+        </ApiServiceContext>
     )
 }
