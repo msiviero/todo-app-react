@@ -48,7 +48,7 @@ export const TodoList = () => {
                             key={index}
                         >
                             <Checkbox id={todo.id} checked={todo.isCompleted} onChange={checked => onTodoEdit({ ...todo, isCompleted: checked })} />
-                            <div className={`flex-1 ${todo.isCompleted ? 'line-through' : ''}`}>
+                            <div className="flex-1">
                                 <EditableLabel onChange={value => onTodoEdit({ ...todo, title: value })} value={todo.title} readOnly={todo.isCompleted} />
                             </div>
                             <button onClick={() => onTodoDelete(todo.id)} className="text-red-500 hover:bg-red-50 p-4 cursor-pointer">

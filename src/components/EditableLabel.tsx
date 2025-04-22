@@ -11,9 +11,8 @@ export const EditableLabel = ({ value, readOnly, onChange }: EditableLabelProps)
     const [isEditMode, setIsEditMode] = useState(false);
     const [editedText, setEditedText] = useState(value);
 
-
     const handleLabelClick = () => {
-        setIsEditMode(true && !readOnly);
+        setIsEditMode(true);
     }
 
     const handleTextEdit = () => {
@@ -24,14 +23,14 @@ export const EditableLabel = ({ value, readOnly, onChange }: EditableLabelProps)
     }
 
     return (
-        <form className="w-full flex-1 cursor-pointer" action={handleTextEdit}>
-            {
-                isEditMode
-                    ? <input autoFocus={true} className="py-1 block w-full text-lg focus:outline-none" type="text" value={editedText} onBlur={handleTextEdit} onChange={e => setEditedText(e.target.value)} />
-                    : <label className="block w-full text-lg" onClick={handleLabelClick}>
-                        {editedText}
-                    </label>
-            }
-        </form>
-    );
+        isEditMode
+            ?
+            <form action={handleTextEdit}>
+                <input autoFocus={true} className="py-1 block w-full text-lg focus:outline-none" type="text" value={editedText} onBlur={handleTextEdit} onChange={e => setEditedText(e.target.value)} />
+            </form>
+            :
+            <button className="text-left cursor-pointer w-full block text-lg disabled:line-through" disabled={readOnly} onClick={handleLabelClick}>
+                {editedText}
+            </button>
+    )
 };
