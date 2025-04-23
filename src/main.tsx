@@ -6,7 +6,7 @@ import { NotificationProvider } from './state/NotificationProvider.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <NotificationProvider>
+    <NotificationProvider initialState={{ visible: false, message: '' }}>
       <TodoApp />
     </NotificationProvider>
   </StrictMode>,
