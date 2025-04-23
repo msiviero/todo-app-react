@@ -17,9 +17,9 @@ export interface ApiService {
 
 export const httpClient = axios.create({
     baseURL: `${envConfig.apiUrl}/api`,
+    timeout: 2000,
     headers: {
         'Content-Type': 'application/json',
-        'User-Agent': 'TodoApp/1.0'
     }
 });
 

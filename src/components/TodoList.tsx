@@ -3,26 +3,34 @@ import { todoReducer } from "../reducers/todoReducer";
 import { Checkbox } from "./Checkbox";
 import { AddTodoInput } from "./AddInput";
 import { EditableLabel } from "./EditableLabel";
-import { ApiServiceContext } from "../di/ApiServiceProvider";
 import { Todo } from "../model/todo";
-import { ApiService, httpClient, makeApiService } from "../service/apiService";
+import { ApiService } from "../service/apiService";
 
 
-const apiService: ApiService = makeApiService(httpClient);
+export interface TodoListProps {
+    api: ApiService;
+}
 
-export const TodoList = () => {
-
+export const TodoList = ({ api }: TodoListProps) => {
     const [todos, dispatch] = useReducer(todoReducer, []);
 
-    const onTodoAdd = (title: string) => {
-        dispatch({
-            type: 'ADD_TODO',
-            item: {
-                id: Date.now(),
-                title,
-                isCompleted: false,
-            },
-        })
+    const onTodoAdd = async (title: string) => {
+        const todo = {
+            id: -1,
+            title,
+            isCompleted: false,
+        };
+
+        try {
+            const result = await api.addTodo(todo);
+            if (!result.ok) {
+                console.error('Error adding todo', result.cause);   
+            }
+            dispatch({ type: 'ADD_TODO', item: todo });
+        } catch (e) {
+            // AxiosError
+            console.error(e);
+        }
     }
 
     const onTodoDelete = (id: number) => {
@@ -37,7 +45,7 @@ export const TodoList = () => {
     }
 
     return (
-        <ApiServiceContext value={apiService}>
+        <>
             <div className="container mx-auto p-4">
                 <AddTodoInput onSubmit={onTodoAdd} />
             </div>
@@ -60,6 +68,6 @@ export const TodoList = () => {
                     ))}
                 </div>
             </div>
-        </ApiServiceContext>
+        </>
     )
 }
