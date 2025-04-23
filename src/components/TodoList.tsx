@@ -1,10 +1,12 @@
 import { useReducer } from "react";
-import { todoReducer } from "../reducers/todoReducer";
+import { todoReducer } from "../state/todoReducer";
 import { Checkbox } from "./Checkbox";
 import { AddTodoInput } from "./AddInput";
 import { EditableLabel } from "./EditableLabel";
 import { Todo } from "../model/todo";
 import { ApiService } from "../service/apiService";
+import { isAxiosError } from "axios";
+import { useDispatchNotification } from "../state/NotificationProvider";
 
 
 export interface TodoListProps {
@@ -12,7 +14,8 @@ export interface TodoListProps {
 }
 
 export const TodoList = ({ api }: TodoListProps) => {
-    const [todos, dispatch] = useReducer(todoReducer, []);
+    const [todos, dispatchTodoAction] = useReducer(todoReducer, []);
+    const dispatchNotification = useDispatchNotification();
 
     const onTodoAdd = async (title: string) => {
         const todo = {
@@ -24,24 +27,40 @@ export const TodoList = ({ api }: TodoListProps) => {
         try {
             const result = await api.addTodo(todo);
             if (!result.ok) {
-                console.error('Error adding todo', result.cause);   
+                return dispatchNotification({
+                    type: 'SHOW',
+                    message: `Error adding todo: ${result.cause}`
+                });
             }
-            dispatch({ type: 'ADD_TODO', item: todo });
+            dispatchTodoAction({ type: 'ADD_TODO', item: todo });
         } catch (e) {
-            // AxiosError
-            console.error(e);
+            handleError(e);
         }
     }
 
     const onTodoDelete = (id: number) => {
-        dispatch({ type: 'REMOVE_TODO', id })
+        dispatchTodoAction({ type: 'REMOVE_TODO', id })
     }
 
     const onTodoEdit = (todo: Todo) => {
-        dispatch({
+        dispatchTodoAction({
             type: 'EDIT_TODO',
             item: todo
         })
+    }
+
+    const handleError = (e: unknown) => {
+        if (isAxiosError(e)) {
+            dispatchNotification({
+                type: 'SHOW',
+                message: `http error ${e.status}: ${e.cause?.message}`
+            });
+        }
+        // generic error
+        dispatchNotification({
+            type: 'SHOW',
+            message: `Error adding todo`
+        });
     }
 
     return (
