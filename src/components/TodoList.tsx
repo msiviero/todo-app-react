@@ -7,6 +7,7 @@ import { Todo } from "../model/todo";
 import { ApiService } from "../service/apiService";
 import { isAxiosError } from "axios";
 import { useDispatchNotification } from "../state/NotificationProvider";
+import { NotificationType } from "./Notification";
 
 
 export interface TodoListProps {
@@ -29,9 +30,15 @@ export const TodoList = ({ api }: TodoListProps) => {
             if (!result.ok) {
                 return dispatchNotification({
                     type: 'SHOW',
-                    message: `Error adding todo: ${result.cause}`
+                    message: `Error adding todo: ${result.cause}`,
+                    notificationType: NotificationType.Error,
                 });
             }
+            dispatchNotification({
+                type: 'SHOW',
+                message: `Todo added successfully`,
+                notificationType: NotificationType.Success,
+            })
             dispatchTodoAction({ type: 'ADD_TODO', item: todo });
         } catch (e) {
             handleError(e);
@@ -53,13 +60,15 @@ export const TodoList = ({ api }: TodoListProps) => {
         if (isAxiosError(e)) {
             dispatchNotification({
                 type: 'SHOW',
-                message: `http error ${e.status}: ${e.cause?.message}`
+                message: `http error ${e.status}: ${e.cause?.message}`,
+                notificationType: NotificationType.Error,
             });
         }
         // generic error
         dispatchNotification({
             type: 'SHOW',
-            message: `Error adding todo`
+            message: `Error adding todo: ${e}`,
+            notificationType: NotificationType.Error,
         });
     }
 

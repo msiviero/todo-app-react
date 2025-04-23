@@ -17,9 +17,13 @@ export const TodoApp = () => {
                 </h1>
             </nav>
             <main className="flex flex-col my-4 text-gray-700">
-                <TodoList api={apiService}/>
+                <TodoList api={apiService} />
             </main>
-            <Notification message={notificationState.message} visible={notificationState.visible}/>
+            <Notification
+                message={notificationState.message}
+                visible={notificationState.visible}
+                type={notificationState.type}
+            />
         </div>
     )
 }
