@@ -110,10 +110,10 @@ export const TodoList = ({ api, keyGenerator }: TodoListProps) => {
                 <AddTodoInput onSubmit={onTodoAdd} />
             </div>
             <div className="container mx-auto p-4">
-                <div className="bg-white rounded-xl shadow-xl overflow-hidden">
+                <div className="bg-white rounded-xl shadow-xl overflow-hidden" role="table">
                     {todos.map((todo) => (
-                        <div className="flex flex-row gap-4 space-between items-center justify-center border-gray-100 border-b hover:bg-gray-50" key={todo.key}>
-                            <Checkbox todoKey={todo.key} checked={todo.isCompleted} onChange={checked => onTodoEdit({ ...todo, isCompleted: checked })} />
+                        <div className="flex flex-row gap-4 space-between items-center justify-center border-gray-100 border-b hover:bg-gray-50" key={todo.key} role="row">
+                            <Checkbox checked={todo.isCompleted} onChange={checked => onTodoEdit({ ...todo, isCompleted: checked })} />
                             <div className="flex-1">
                                 <EditableLabel onChange={value => onTodoEdit({ ...todo, title: value })} value={todo.title} readOnly={todo.isCompleted} />
                             </div>

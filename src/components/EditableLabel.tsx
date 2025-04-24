@@ -26,10 +26,10 @@ export const EditableLabel = ({ value, readOnly, onChange }: EditableLabelProps)
         isEditMode
             ?
             <form action={handleTextEdit}>
-                <input autoFocus={true} className="py-1 block w-full text-lg focus:outline-none" type="text" value={editedText} onBlur={handleTextEdit} onChange={e => setEditedText(e.target.value)} />
+                <input name="title" aria-label="title" autoFocus={true} className="py-1 block w-full text-lg focus:outline-none" type="text" value={editedText} onBlur={handleTextEdit} onChange={e => setEditedText(e.target.value)} />
             </form>
             :
-            <button className="text-left cursor-pointer w-full block text-lg disabled:line-through" disabled={readOnly} onClick={handleLabelClick}>
+            <button className="text-left cursor-pointer w-full block text-lg disabled:line-through" aria-label="Edit todo title" disabled={readOnly} onClick={handleLabelClick}>
                 {editedText}
             </button>
     )

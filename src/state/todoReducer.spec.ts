@@ -6,19 +6,19 @@ describe('todo reducer', () => {
 
     test('should load todos', () => {
         const result = todoReducer([{
-            id: 1,
+            key: 'abc',
             title: "test1",
             isCompleted: true,
         }], {
             type: 'LOAD_TODOS',
             items: [{
-                id: 2,
+                key: "def",
                 title: "test2",
                 isCompleted: true,
             },]
         });
         expect(result).toEqual([{
-            id: 2,
+            key: "def",
             title: "test2",
             isCompleted: true,
         },]);
@@ -27,24 +27,24 @@ describe('todo reducer', () => {
 
     test('should add todo', () => {
         const result = todoReducer([{
-            id: 1,
+            key: 'abc',
             title: "test",
             isCompleted: true,
         },], {
             type: 'ADD_TODO',
             item: {
-                id: 2,
+                key: "def",
                 title: "test2",
                 isCompleted: false,
             }
         });
 
         expect(result).toEqual([{
-            id: 1,
+            key: 'abc',
             title: "test",
             isCompleted: true,
         }, {
-            id: 2,
+            key: "def",
             title: "test2",
             isCompleted: false,
         }]);
@@ -52,21 +52,26 @@ describe('todo reducer', () => {
 
     test('should delete todo', () => {
         const result = todoReducer([{
-            id: 1,
+            key: 'abc',
             title: "test",
             isCompleted: true,
         }, {
-            id: 2,
+            key: "def",
             title: "test2",
             isCompleted: false,
 
         }], {
             type: 'REMOVE_TODO',
-            id: 2,
+            item: {
+                key: "def",
+                title: "test2",
+                isCompleted: false,
+    
+            },
         });
 
         expect(result).toEqual([{
-            id: 1,
+            key: 'abc',
             title: "test",
             isCompleted: true,
         }]);
@@ -74,28 +79,28 @@ describe('todo reducer', () => {
 
     test('should edit todo', () => {
         const result = todoReducer([{
-            id: 1,
+            key: 'abc',
             title: "test",
             isCompleted: true,
         }, {
-            id: 2,
+            key: "def",
             title: "test2",
             isCompleted: false,
         }], {
             type: 'EDIT_TODO',
             item: {
-                id: 2,
+                key: "def",
                 title: "test3",
                 isCompleted: true,
             },
         });
 
         expect(result).toEqual([{
-            id: 1,
+            key: 'abc',
             title: "test",
             isCompleted: true,
         }, {
-            id: 2,
+            key: "def",
             title: "test3",
             isCompleted: true,
         }]);
