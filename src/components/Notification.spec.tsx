@@ -4,7 +4,7 @@ import { render } from "vitest-browser-react"
 import { page } from '@vitest/browser/context'
 import { NotificationProvider, useDispatchNotification } from "../state/NotificationProvider"
 
-describe("Notificatio component", () => {
+describe("Notification component", () => {
 
     test('Should allow to close by clicking x button', async () => {
 
