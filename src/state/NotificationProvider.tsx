@@ -1,9 +1,8 @@
 import { createContext, Dispatch, PropsWithChildren, useContext, useReducer } from "react";
 import { NotificationAction, notificationReducer, NotificationState } from "./notificationReducer";
-import { NotificationType } from "../components/Notification";
 
 
-export const NotificationContext = createContext<NotificationState>({ visible: false, message: '', type: NotificationType.Default });
+export const NotificationContext = createContext<NotificationState>({ visible: false, message: '', type: 'default' });
 export const NotificationDispatchContext = createContext<Dispatch<NotificationAction>>(() => { console.error('No action provided') });
 
 export interface NotificationProviderProps {

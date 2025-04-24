@@ -13,7 +13,7 @@ export interface TodoAddAction {
 
 export interface TodoRemoveAction {
     type: 'REMOVE_TODO';
-    id: number;
+    key: string;
 }
 
 export interface TodoEditAction {

@@ -1,6 +1,7 @@
 import { Reducer } from "react";
-import { NotificationType } from "../components/Notification";
 
+
+export type NotificationType = "default" | "success" | "error"
 
 export interface NotificationState {
     visible: boolean
@@ -13,7 +14,7 @@ export type NotificationAction = NotificationShowAction | NotificationHideAction
 interface NotificationShowAction {
     type: 'SHOW'
     message: string
-    notificationType: NotificationType
+    notificationType?: NotificationType
 }
 
 interface NotificationHideAction {
@@ -27,7 +28,7 @@ export const notificationReducer: Reducer<NotificationState, NotificationAction>
                 ...state,
                 visible: true,
                 message: action.message,
-                type: action.notificationType,
+                type: action.notificationType || "default",
             }
         case 'HIDE':
             return {

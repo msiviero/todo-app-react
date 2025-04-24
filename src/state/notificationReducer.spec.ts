@@ -7,14 +7,17 @@ describe('notification reducer', () => {
     test('should show notification', () => {
         const result = notificationReducer({
             visible: false,
-            message: ''
+            message: '',
+            type: "default"
         }, {
             type: 'SHOW',
-            message: 'hello'
+            message: 'hello',
+            notificationType: "success",
         });
 
         expect(result).toEqual({
             visible: true,
+            type: 'success',
             message: 'hello'
         });
     })
@@ -22,13 +25,15 @@ describe('notification reducer', () => {
     test('should hide notification', () => {
         const result = notificationReducer({
             visible: true,
-            message: 'hello'
+            message: 'hello',
+            type: "default",
         }, {
             type: 'HIDE',
         });
 
         expect(result).toEqual({
             visible: false,
+            type: "default",
             message: ''
         });
     })

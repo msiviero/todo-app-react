@@ -8,13 +8,12 @@ describe("Notification component", () => {
 
     test('Should allow to close by clicking x button', async () => {
 
-
         vi.mock('../state/NotificationProvider');
         vi.mocked(useDispatchNotification).mockReturnValue(() => { })
 
         const { getByRole, getByText } = render(
             <NotificationProvider initialState={{ visible: true, message: 'Hello world' }}>
-                <Notification visible={true} message="Hello world" />
+                <Notification visible={true} message="Hello world" type='default' />
             </NotificationProvider>
         )
 

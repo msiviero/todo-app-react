@@ -1,18 +1,13 @@
 import { useDispatchNotification } from "../state/NotificationProvider";
-
-export enum NotificationType {
-    Success = "success",
-    Error = "error",
-    Default = "default",
-}
+import { NotificationType } from "../state/notificationReducer";
 
 interface NotificationProps {
-    message: string;
-    visible: boolean;
-    type: NotificationType
+    message: string
+    visible: boolean
+    type?: NotificationType
 }
 
-export const Notification = ({ message, visible, type }: NotificationProps) => {
+export const Notification = ({ message, visible, type = "default" }: NotificationProps) => {
 
     const dispatchNotification = useDispatchNotification();
     const handleClose = () => dispatchNotification({ type: 'HIDE' });
