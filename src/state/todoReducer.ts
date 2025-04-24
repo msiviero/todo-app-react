@@ -30,8 +30,7 @@ export const todoReducer: Reducer<Todo[], TodoAction> = (todos, action) => {
         case 'ADD_TODO':
             return [...todos, action.item]
         case 'REMOVE_TODO':
-            const newState = todos.filter((it) => it.key !== action.item.key);
-            return newState;
+            return todos.filter((it) => it.key !== action.item.key)
         case 'EDIT_TODO':
             return todos.map((it) => it.key === action.item.key ? action.item : it)
         default:

@@ -76,8 +76,9 @@ export const TodoList = ({ api, keyGenerator }: TodoListProps) => {
         }
     }
 
-    const onTodoEdit = (todo: Todo) => {
+    const onTodoEdit = async (todo: Todo) => {
         try {
+            await api.editTodo(todo);
             dispatchTodoAction({
                 type: 'EDIT_TODO',
                 item: todo
