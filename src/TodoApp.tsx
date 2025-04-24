@@ -2,6 +2,7 @@ import { TodoList } from "./components/TodoList";
 import { Notification } from "./components/Notification";
 import { ApiService, httpClient, makeApiService } from "./service/apiService";
 import { useNotificationState } from "./state/NotificationProvider";
+import { uuidKeyGenerator } from "./service/keyService";
 
 
 const apiService: ApiService = makeApiService(httpClient);
@@ -17,7 +18,7 @@ export const TodoApp = () => {
                 </h1>
             </nav>
             <main className="flex flex-col my-4 text-gray-700">
-                <TodoList api={apiService} />
+                <TodoList api={apiService} keyGenerator={uuidKeyGenerator}  />
             </main>
             <Notification
                 message={notificationState.message}

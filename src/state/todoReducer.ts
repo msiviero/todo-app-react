@@ -13,7 +13,7 @@ export interface TodoAddAction {
 
 export interface TodoRemoveAction {
     type: 'REMOVE_TODO';
-    key: string;
+    item: Todo;
 }
 
 export interface TodoEditAction {
@@ -30,9 +30,10 @@ export const todoReducer: Reducer<Todo[], TodoAction> = (todos, action) => {
         case 'ADD_TODO':
             return [...todos, action.item]
         case 'REMOVE_TODO':
-            return todos.filter((it) => it.id !== action.id);
+            const newState = todos.filter((it) => it.key !== action.item.key);
+            return newState;
         case 'EDIT_TODO':
-            return todos.map((it) => it.id === action.item.id ? action.item : it)
+            return todos.map((it) => it.key === action.item.key ? action.item : it)
         default:
             throw new Error(`Unknown action: ${action}`)
     }
