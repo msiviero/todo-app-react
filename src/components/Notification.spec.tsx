@@ -12,7 +12,7 @@ describe("Notification component", () => {
         vi.mocked(useDispatchNotification).mockReturnValue(() => { })
 
         const { getByRole, getByText } = render(
-            <NotificationProvider initialState={{ visible: true, message: 'Hello world' }}>
+            <NotificationProvider initialState={{ visible: true, message: 'Hello world', type: 'default' }}>
                 <Notification visible={true} message="Hello world" type='default' />
             </NotificationProvider>
         )
@@ -24,7 +24,7 @@ describe("Notification component", () => {
     })
 
     test('Should be hidden if visible prop is set to false', async () => {
-        const { container } = render(<Notification visible={false} message="Hello world" />)
+        const { container } = render(<Notification visible={false} message="Hello world" type="default" />)
         await expect.element(page.elementLocator(container)).toBeEmptyDOMElement()
     })
 })

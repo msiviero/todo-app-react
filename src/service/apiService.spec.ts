@@ -40,7 +40,7 @@ describe("Api service", () => {
             statusText: "Created",
         });
         const underTest = makeApiService(httpClient);
-        const result = await underTest.addTodo({ id: 0, title: 'New todo', isCompleted: false });
+        const result = await underTest.addTodo({ key: "abc", title: 'New todo', isCompleted: false });
         expect(result.ok).toBe(true);
     });
 
@@ -50,7 +50,7 @@ describe("Api service", () => {
             statusText: "Fake error",
         });
         const underTest = makeApiService(httpClient);
-        const result = await underTest.addTodo({ id: 0, title: 'New todo', isCompleted: false });
+        const result = await underTest.addTodo({ key: "abc", title: 'New todo', isCompleted: false });
         expect(result.ok).toBe(false);
         expect(result.cause).toEqual("Server error: Fake error")
     });
@@ -61,7 +61,7 @@ describe("Api service", () => {
             statusText: "Ok",
         });
         const underTest = makeApiService(httpClient);
-        const result = await underTest.editTodo({ id: 2, title: 'New todo title', isCompleted: true });
+        const result = await underTest.editTodo({ key: "def", title: 'New todo title', isCompleted: true });
         expect(result.ok).toBe(true);
     });
 
@@ -71,7 +71,7 @@ describe("Api service", () => {
             statusText: "Fake error",
         });
         const underTest = makeApiService(httpClient);
-        const result = await underTest.editTodo({ id: 2, title: 'New todo title', isCompleted: true });
+        const result = await underTest.editTodo({ key: "def", title: 'New todo title', isCompleted: true });
         expect(result.ok).toBe(false);
         expect(result.cause).toEqual("Server error: Fake error")
     });
@@ -82,7 +82,7 @@ describe("Api service", () => {
             statusText: "No content",
         });
         const underTest = makeApiService(httpClient);
-        const result = await underTest.deleteTodo({ id: 2, title: 'todo title', isCompleted: true });
+        const result = await underTest.deleteTodo({ key: "def", title: 'todo title', isCompleted: true });
         expect(result.ok).toBe(true);
     });
 
@@ -92,7 +92,7 @@ describe("Api service", () => {
             statusText: "Fake error",
         });
         const underTest = makeApiService(httpClient);
-        const result = await underTest.deleteTodo({ id: 2, title: 'todo title', isCompleted: true });
+        const result = await underTest.deleteTodo({ key: "def", title: 'todo title', isCompleted: true });
         expect(result.ok).toBe(false);
         expect(result.cause).toEqual("Server error: Fake error")
     });

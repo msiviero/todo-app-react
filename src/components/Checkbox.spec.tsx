@@ -7,7 +7,7 @@ describe("Checkbox", () => {
     test('Should be clickable', async () => {
 
         let checked = false;
-        const { getByRole } = render(<Checkbox id={0} onChange={(value) => checked = value} />)
+        const { getByRole } = render(<Checkbox onChange={(value) => checked = value} />)
 
         // initially should not be checked
         await expect.element(getByRole('checkbox')).not.toBeChecked();
@@ -20,7 +20,7 @@ describe("Checkbox", () => {
     })
 
     test('Should allow initial value as prop', async () => {
-        const { getByRole } = render(<Checkbox id={0} checked={true} />)
+        const { getByRole } = render(<Checkbox checked={true} />)
 
         // initially should not be checked
         await expect.element(getByRole('checkbox')).toBeChecked();
