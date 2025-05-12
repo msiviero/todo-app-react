@@ -23,9 +23,6 @@ jobs:
 
       - name: Test
         run : npm run test
-      
-      - name: Build
-        run : npm run build
 
       - name: Deploy to Coolify
         run: | 
