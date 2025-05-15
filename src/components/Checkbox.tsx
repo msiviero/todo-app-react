@@ -13,7 +13,7 @@ export const Checkbox = ({ checked, onChange }: CheckboxProps) => {
 
     return (
         <div className="flex items-center">
-            <input onChange={handleChange} readOnly checked={checked} type="checkbox" className="mx-4 appearance-none peer w-7 h-7 border-2 border-gray-300 rounded-sm bg-white" />
+            <input aria-label="Check todo done" onChange={handleChange} readOnly checked={checked} type="checkbox" className="mx-4 appearance-none peer w-7 h-7 border-2 border-gray-300 rounded-sm bg-white" />
             {
                 checked
                     ?
